@@ -2,6 +2,69 @@
 http://ionicframework.com/docs/theming/ */
 
 /** Ionic CSS Variables **/
+
+@font-face {
+	font-family: 'Ubuntu';
+	src: url('/public/assets/fonts/Ubuntu-Medium.ttf');
+}
+@font-face {
+	font-family: 'Montserrat', sans-serif;
+	src: url('/public/assets/fonts/Montserrat-Regular.ttf');
+}
+:root {
+  --ion-color-new-custom: #343e4b;
+  --ion-color-new-custom-rgb: 52,62,75;
+  --ion-color-new-custom-contrast: #ffffff;
+  --ion-color-new-custom-contrast-rgb: 255,255,255;
+  --ion-color-new-custom-shade: #2e3742;
+  --ion-color-new-custom-tint: #48515d;
+}
+
+.ion-color-new-custom {
+  --ion-color-base: var(--ion-color-new-custom);
+  --ion-color-base-rgb: var(--ion-color-new-custom-rgb);
+  --ion-color-contrast: var(--ion-color-new-custom-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-new-custom-contrast-rgb);
+  --ion-color-shade: var(--ion-color-new-custom-shade);
+  --ion-color-tint: var(--ion-color-new-custom-tint);
+}
+
+:root {
+  --ion-color-new: #324485;
+  --ion-color-new-rgb: 50,68,133;
+  --ion-color-new-contrast: #ffffff;
+  --ion-color-new-contrast-rgb: 255,255,255;
+  --ion-color-new-shade: #2c3c75;
+  --ion-color-new-tint: #475791;
+}
+
+.ion-color-new {
+  --ion-color-base: var(--ion-color-new);
+  --ion-color-base-rgb: var(--ion-color-new-rgb);
+  --ion-color-contrast: var(--ion-color-new-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-new-contrast-rgb);
+  --ion-color-shade: var(--ion-color-new-shade);
+  --ion-color-tint: var(--ion-color-new-tint);
+}
+
+:root {
+  --ion-color-blue-dark: #161E29;
+  --ion-color-blue-dark-rgb: 22,30,41;
+  --ion-color-blue-dark-contrast: #ffffff;
+  --ion-color-blue-dark-contrast-rgb: 255,255,255;
+  --ion-color-blue-dark-shade: #131a24;
+  --ion-color-blue-dark-tint: #2d353e;
+}
+
+.ion-color-blue-dark {
+  --ion-color-base: var(--ion-color-blue-dark);
+  --ion-color-base-rgb: var(--ion-color-blue-dark-rgb);
+  --ion-color-contrast: var(--ion-color-blue-dark-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-blue-dark-contrast-rgb);
+  --ion-color-shade: var(--ion-color-blue-dark-shade);
+  --ion-color-tint: var(--ion-color-blue-dark-tint);
+}
+
 :root {
   /** primary **/
   --ion-color-primary: #3880ff;

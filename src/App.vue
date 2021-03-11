@@ -1,18 +1,30 @@
 <template>
   <ion-app>
-    <ion-router-outlet />
+		
+		<router-view v-slot="{ Component }">
+  <keep-alive exclude="Manga">
+    <component :is="Component" />
+  </keep-alive>
+</router-view>
   </ion-app>
 </template>
 
-<script lang="ts">
-import { IonApp, IonRouterOutlet } from '@ionic/vue';
-import { defineComponent } from 'vue';
+<script>
+import { IonApp, } from '@ionic/vue';
+import { useRouter } from 'vue-router'
 
-export default defineComponent({
+export default {
   name: 'App',
   components: {
     IonApp,
-    IonRouterOutlet
-  }
-});
+		
+  },
+	setup() {
+		const router = useRouter();
+			return {
+				router
+			}	
+	},
+
+};
 </script>
