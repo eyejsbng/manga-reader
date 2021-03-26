@@ -1,2 +1,2 @@
 # manga-reader
-Read Manga Online
+Manga Reader App using Ionic Vue
