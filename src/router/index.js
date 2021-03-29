@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from '@ionic/vue-router';
+import { createRouter, createWebHashHistory } from '@ionic/vue-router';
 import Tabs from '../views/Tabs.vue'
 
 const routes = [
@@ -46,11 +46,16 @@ const routes = [
 		path: '/manga/chapter/:chapterNumber',
 		name: 'Chapter',
 		component : () => import('@/views/Chapter.vue')
-	}
+	},
+  {
+    path: '/manga/genre/:slug',
+    name: 'Genre',
+    component: () => import('@/views/Genre.vue')
+  }
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHashHistory(process.env.BASE_URL),
   routes
 })
 

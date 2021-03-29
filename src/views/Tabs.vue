@@ -1,11 +1,11 @@
 <template>
   <ion-page>
     <ion-tabs class="ion-no-border">
-      <ion-tab-bar color="blue-dark" slot="bottom">
-        <ion-tab-button tab="tab1" href="/tabs/tab1">
+      <ion-tab-bar  color="blue-dark" slot="bottom">
+        <ion-tab-button  tab="tab1" href="/tabs/tab1">
           <ion-icon :icon="compass" />
         </ion-tab-button>
-        <ion-tab-button tab="tab2" href="/tabs/tab2">
+        <ion-tab-button  tab="tab2" href="/tabs/tab2">
           <ion-icon :icon="searchOutline" />
         </ion-tab-button>
         <ion-tab-button tab="tab3" href="/tabs/tab3">
@@ -35,12 +35,10 @@ export default {
 }
 </script>
 <style scoped>
-
-ion-content {
-	background: #161E29
+.tab-selected {
+  border-top: 5px solid #3880ff;
+  transition: 0.5s;
+  color:#3880ff;
 }
 
-ion-icon{
-  color: #d7d8da;
-}
 </style>

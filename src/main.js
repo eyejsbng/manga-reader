@@ -23,9 +23,7 @@ import '@ionic/vue/css/display.css';
 import './theme/variables.css';
 
 const app = createApp(App)
-  .use(IonicVue, {
-		mode: 'ios'
-	})
+  .use(IonicVue)
   .use(router);
   
 router.isReady().then(() => {

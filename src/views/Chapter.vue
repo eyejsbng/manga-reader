@@ -4,16 +4,12 @@
 	<ion-buttons>
 		<ion-back-button slot="start" text="" color="primary" defaultHref="" @click="goBack" :style="{ position: 'absolute', }"></ion-back-button>
 	</ion-buttons>
-	<ion-buttons slot="end">
-		<ion-button @click="getChapters"><ion-icon :icon="refreshCircleOutline"></ion-icon></ion-button>
-	</ion-buttons>
+
 	</ion-toolbar>
-			
-		<!-- <ion-chip slot="end" @click="next"><ion-label color="secondary">Next</ion-label></ion-chip> -->
-  
+	
 	<ion-content :fullscreen="true" class="ion-no-padding" color="blue-dark" v-if="images" v-on:scroll="onScroll">
 		<div class="ion-no-padding"  v-for="image in images.data" :key="image.image">
-				<img :src="image">
+				<ion-img :src="image"/>
 		</div>
 		
 	</ion-content>
@@ -57,10 +53,15 @@ export default {
 				refreshCircleOutline
 			}	
 	},
-
-	created() {
 	
-		this.getChapters();
+	beforeRouteLeave() {
+		this.images = []
+	},
+	beforeRouteUpdate() {
+		this.getChapters()
+	},
+	mounted() {
+		this.getChapters();	
 	},
 	methods: {
 		onScroll() {
