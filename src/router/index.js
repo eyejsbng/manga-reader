@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from '@ionic/vue-router';
+import { createRouter, createWebHistory} from '@ionic/vue-router';
 import Tabs from '../views/Tabs.vue'
 
 const routes = [
@@ -9,7 +9,6 @@ const routes = [
   {
     path: '/tabs/',
     component: Tabs,
-	
     children: [
       {
         path: '',
@@ -55,7 +54,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(process.env.BASE_URL),
+  history: createWebHistory(process.env.BASE_URL),
   routes
 })
 

@@ -36,7 +36,7 @@ export default {
 </script>
 <style scoped>
 .tab-selected {
-  border-top: 5px solid #3880ff;
+  border-top: 3px solid #3880ff;
   transition: 0.5s;
   color:#3880ff;
 }

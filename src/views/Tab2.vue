@@ -1,17 +1,14 @@
 <template>
 <ion-page>
+    <ion-header>
+        <ion-searchbar color="light" :value="keyword" @keydown.enter="searchManga($event.target.value)">
+        </ion-searchbar>             
+    </ion-header>
     <ion-content color="blue-dark">
         <div class="search">
-            <ion-item color="blue-dark" lines="none">
-                <h3>Search Manga</h3>
-            </ion-item>
-            <div>
-                <ion-searchbar color="light" :value="keyword" @keydown.enter="searchManga($event.target.value)">
-                </ion-searchbar>
-            </div>
             <ion-slides :options="opts">
                 <ion-slide v-for="g in genre" :key="g">
-                    <ion-chip color="light">
+                    <ion-chip color="light" @click="displayGenre(g)">
                         <ion-label color="secondary">{{ g }}</ion-label>
                     </ion-chip>
                 </ion-slide>
@@ -34,21 +31,22 @@
                 </ion-fab-button>
             </ion-fab>
            </ion-footer>
-            <ion-row v-if="!isLoading" style="padding-top:50px">      
+            <ion-row v-if="!isLoading">
+                <ion-list-header>
+                    <ion-label color="light">Search Result</ion-label>
+                </ion-list-header>      
                <ion-col size="4" v-for="manga in searchResult" :key="manga.name">
                     <div class="ion-text-center slideCard" @click="displayManga(manga)">
+                         <p class="chapter"> {{ manga.latestChapter.split(" ").splice(-1).toString()  }}</p>
                         <ion-img :src="manga.thumbnail"/>
                         <div class="overLay">
                             <div class="card-title">
                                 <p>{{ manga.name }}</p>
                             </div>
-                            <div class="sub-title">
-                                <p> {{ manga.latestChapter }}</p>
-                            </div>
                         </div>
                     </div>
                 </ion-col>       
-                 <ion-infinite-scroll
+                 <ion-infinite-scroll color="light"
                     @ionInfinite="loadMore($event)" :disabled="isDisabled"
                 >
                     <ion-infinite-scroll-content
@@ -75,7 +73,7 @@ import {
     IonPage,
     IonContent,
     loadingController,
-    IonItem,
+ 
     IonSearchbar,
     IonLabel,
     IonChip,
@@ -94,14 +92,14 @@ import {
 } from '@ionic/vue';
 import {
     useRouter
-} from 'vue-router'
+} from 'vue-router';
 import {
     refreshCircleOutline,
     alertCircleOutline,
     chevronUpOutline
 } from 'ionicons/icons';
-import axios from 'axios'
-import _ from 'lodash'
+import axios from 'axios';
+import Genre from '../utils/genre'
 import {
     Plugins
 } from '@capacitor/core'
@@ -113,7 +111,7 @@ export default {
     components: {
         IonContent,
         IonPage,
-        IonItem,
+        
         IonSearchbar,
         IonLabel,
         IonChip,
@@ -130,19 +128,22 @@ export default {
         IonRow,
     
     },
+    setup() {
+        const router = useRouter()
+        const genre = Genre;
+        return {
+            genre,
+            router,
+            refreshCircleOutline,
+            alertCircleOutline,
+            chevronUpOutline
+        }
+    },
     data() {
         return {
             page: 1,
-            genre: [
-                'Action', 'Adult', 'Adventure', 'Comedy', 'Cooking',
-                'Doujinshi', 'Drama', 'Ecchi', 'Fantasy', 'Gender bender', 'Harem', 'Historical', 'Horror',
-                'Isekai', 'Josei', 'Manhua', 'Manhwa', 'Martial arts', 'Mature', 'Mecha', 'Medical', 'Mystery',
-                'One shot', 'Psychological', 'Romance', 'School life', 'Sci fi', 'Seinen', 'Shoujo', 'Shoujo ai',
-                'ShounenShounen ai', 'Slice of life', 'Smut', 'Sports', 'Supernatural', 'Tragedy', 'Webtoons',
-                'Yaoi', 'Yuri'
-            ],
             opts: {
-                slidesPerView: 3.5,
+                slidesPerView: 4.2,
                 spaceBetween: 1,
                 slideOffsetBefore: 1
             },
@@ -158,29 +159,15 @@ export default {
             isDisabled : false,
         }
     },
-    setup() {
-        const router = useRouter()
-        return {
-            router,
-            refreshCircleOutline,
-            alertCircleOutline,
-            chevronUpOutline
-        }
-    },
-    watch: {
-        keyword: _.debounce(function () {
-            this.isTyping = false;
-        }, 1000),
-        isTyping: function (value) {
-            if (!value) {
-                this.searchManga(this.keyword)
-            }
-        }
-    },
-    created() {
-
-    },
     methods: {
+        displayGenre(g) {
+            this.router.push({
+                name: 'Genre',
+                params: {
+                    slug: g
+                }
+            })
+		},
         loadMore(e) {
             this.page += 1
            
@@ -215,9 +202,10 @@ export default {
             axios.get(this.url + keyword , {
                 timeout: 10000
             }).then((resp) => {
-
+                 window.scroll(0,0)
                 this.error = false
                 this.searchResult = resp.data.data
+               
                 if (this.searchResult == '') {
                     this.isEmpty = true
                 } else {
@@ -259,7 +247,22 @@ export default {
 </script>
 
 <style>
-
+ion-list-header {
+    font-size:14px;
+    font-weight: 600;
+}
+.chapter {
+	font-size: 12px;
+	position: absolute;
+	background-color: black;
+	width: 40px;
+	height: 25px;
+	padding-top: 5px;
+	opacity: 0.8;
+	border-radius: 10px;
+	margin-left:4rem;
+	font-weight: 600;
+}
 .search {
     background-color: #161E29;
 }
@@ -271,15 +274,18 @@ export default {
     margin-top: 10px;
     height: auto;
 }
-
+p {
+    font-weight: 600;
+}
 ion-chip {
     --background: #161E29;
+    font-size: 12px;
+    font-weight: 600;
 }
 
 ion-searchbar {
     --background: #161E29;
 }
-
 .loader {
     --background: #161E29;
     color: white;

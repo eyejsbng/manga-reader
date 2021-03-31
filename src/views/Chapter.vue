@@ -8,15 +8,14 @@
 	</ion-toolbar>
 	
 	<ion-content :fullscreen="true" class="ion-no-padding" color="blue-dark" v-if="images" v-on:scroll="onScroll">
-		<div class="ion-no-padding"  v-for="image in images.data" :key="image.image">
+		<div v-for="image in images.data" :key="image.image">
 				<ion-img :src="image"/>
 		</div>
-		
 	</ion-content>
 </ion-page>
 </template>
 <script>
-import { loadingController, IonBackButton, IonPage} from '@ionic/vue';
+import { loadingController, IonBackButton, IonPage, IonImg} from '@ionic/vue';
 import { refreshCircleOutline } from 'ionicons/icons'
 import { useRouter } from 'vue-router';
 import axios from 'axios';
@@ -24,7 +23,8 @@ export default {
 	name: 'Chapter',
 	components: {
 	IonBackButton,
-	IonPage
+	IonPage,
+	IonImg
 	},
 	
 	data() {
